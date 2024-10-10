@@ -5,6 +5,9 @@ class GranuleTextfield extends StatelessWidget {
   final bool obscureText;
   final String? placeholder;
   final TextEditingController? controller;
+  final FocusNode? focusNode;
+  final Function(String)? onFieldSubmitted;
+  final TextInputAction? textInputAction;
 
   const GranuleTextfield({
     super.key,
@@ -12,6 +15,9 @@ class GranuleTextfield extends StatelessWidget {
     this.obscureText = false,
     this.placeholder,
     this.controller,
+    this.onFieldSubmitted,
+    this.focusNode,
+    this.textInputAction,
   });
 
   @override
@@ -31,6 +37,9 @@ class GranuleTextfield extends StatelessWidget {
         TextFormField(
           obscureText: obscureText,
           controller: controller,
+          onFieldSubmitted: onFieldSubmitted,
+          focusNode: focusNode,
+          textInputAction: textInputAction,
           decoration: InputDecoration(
             fillColor: Colors.grey,
             isDense: true,

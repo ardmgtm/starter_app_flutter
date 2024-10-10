@@ -7,11 +7,38 @@ import '../../../widgets/granule_textfield.dart';
 import '../controllers/authentication_controller.dart';
 
 class LoginView extends GetView<AuthenticationController> {
-  const LoginView({super.key});
+  final TextEditingController _usernameInputController =
+      TextEditingController();
+  final TextEditingController _passwordInputController =
+      TextEditingController();
+
+  final FocusNode _usernameNode = FocusNode();
+  final FocusNode _passwordNode = FocusNode();
+
+  LoginView({super.key});
+
+  void loginAction() async {
+    var resp = await controller.login(
+      _usernameInputController.text,
+      _passwordInputController.text,
+    );
+    if (resp.success) {
+      Get.offAllNamed(Routes.HOME);
+    } else {
+      Get.snackbar(
+        "Status",
+        resp.message ?? "",
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(32),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController usernameInputController = TextEditingController();
-    TextEditingController passwordInputController = TextEditingController();
+    _usernameNode.requestFocus();
 
     return Scaffold(
       body: Stack(
@@ -69,14 +96,19 @@ class LoginView extends GetView<AuthenticationController> {
                         GranuleTextfield(
                           label: "Username",
                           placeholder: "Masukkan username atau NPK",
-                          controller: usernameInputController,
+                          controller: _usernameInputController,
+                          focusNode: _usernameNode,
+                          textInputAction: TextInputAction.next,
                         ),
                         const SizedBox(height: 8),
                         GranuleTextfield(
                           label: "Password",
                           obscureText: true,
                           placeholder: "Masukkan Password",
-                          controller: passwordInputController,
+                          controller: _passwordInputController,
+                          focusNode: _passwordNode,
+                          textInputAction: TextInputAction.done,
+                          onFieldSubmitted: (_) => loginAction(),
                         ),
                         const SizedBox(height: 8),
                         SizedBox(
@@ -85,17 +117,7 @@ class LoginView extends GetView<AuthenticationController> {
                             () => Granulebutton(
                               text: "Login",
                               loading: controller.isLoading.value,
-                              onTap: () async {
-                                var resp = await controller.login(
-                                  usernameInputController.text,
-                                  passwordInputController.text,
-                                );
-                                if (resp.success) {
-                                  Get.offAllNamed(Routes.HOME);
-                                } else {
-                                  Get.snackbar("Status", resp.message ?? "");
-                                }
-                              },
+                              onTap: loginAction,
                             ),
                           ),
                         ),
