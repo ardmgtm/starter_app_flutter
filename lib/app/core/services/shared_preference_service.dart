@@ -4,17 +4,15 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferenceService extends GetxService {
-  late SharedPreferences prefs;
+  late final SharedPreferences prefs;
+
   @override
   void onInit() async {
     super.onInit();
     prefs = await SharedPreferences.getInstance();
   }
 
-  T? getValue<T>(
-    String key, [
-    T Function(Map<String, dynamic>)? fromJson,
-  ]) {
+  T? getValue<T>(String key, [T Function(Map<String, dynamic>)? fromJson]) {
     switch (T) {
       case const (int):
         return prefs.getInt(key) as T?;

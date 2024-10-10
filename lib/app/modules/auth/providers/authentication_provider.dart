@@ -18,7 +18,7 @@ class AuthenticationDummyProvider extends AuthenticationProvider {
 
   @override
   bool isAuthenticated() {
-    return sharedPreferenceService.getValue(IS_AUTHENTICATED) ?? false;
+    return sharedPreferenceService.getValue<bool>(IS_AUTHENTICATED) ?? false;
   }
 
   @override

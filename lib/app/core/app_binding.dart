@@ -7,7 +7,7 @@ import 'services/shared_preference_service.dart';
 class AppBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<SharedPreferenceService>(() => SharedPreferenceService());
+    Get.put<SharedPreferenceService>(SharedPreferenceService());
     Get.lazyPut<AuthenticationProvider>(
       () => AuthenticationDummyProvider(sharedPreferenceService: Get.find()),
     );
