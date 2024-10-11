@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../routes/app_pages.dart';
 import '../../../widgets/granule_button.dart';
 import '../../../widgets/granule_textfield.dart';
 import '../controllers/authentication_controller.dart';
@@ -20,22 +19,10 @@ class LoginView extends GetView<AuthenticationController> {
   Future<void> loginAction() async {
     _usernameNode.unfocus();
     _passwordNode.unfocus();
-    var resp = await controller.login(
+    controller.login(
       _usernameInputController.text,
       _passwordInputController.text,
     );
-    if (resp.success) {
-      Get.offAllNamed(Routes.HOME);
-    } else {
-      Get.snackbar(
-        "Status",
-        resp.message ?? "",
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        snackPosition: SnackPosition.BOTTOM,
-        margin: const EdgeInsets.all(32),
-      );
-    }
   }
 
   @override

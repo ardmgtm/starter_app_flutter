@@ -6,7 +6,7 @@ import '../modules/auth/middlewares/guest_middleware.dart';
 import '../modules/auth/providers/authentication_provider.dart';
 import '../modules/auth/views/login_view.dart';
 import '../modules/home/bindings/home_binding.dart';
-import '../modules/home/views/home_view.dart';
+import '../modules/home/views/main_view.dart';
 
 part 'app_routes.dart';
 
