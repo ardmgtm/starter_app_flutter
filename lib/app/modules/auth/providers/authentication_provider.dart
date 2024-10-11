@@ -44,7 +44,8 @@ class AuthenticationDummyProvider extends AuthenticationProvider {
 
   @override
   Future<AppResponse<void>> logout() async {
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 1));
+    sharedPreferenceService.setValue(IS_AUTHENTICATED, false);
     return AppResponse(success: true);
   }
 }

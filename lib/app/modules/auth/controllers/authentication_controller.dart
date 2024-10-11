@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import '../../../core/models/app_response.dart';
 
+import '../../../core/models/app_response.dart';
 import '../models/user.dart';
 import '../providers/authentication_provider.dart';
 
@@ -33,8 +33,9 @@ class AuthenticationController extends GetxController {
     return resp;
   }
 
-  void logout() async {
-    await authenticationProvider.logout();
+  Future<AppResponse<void>> logout() async {
+    var resp = await authenticationProvider.logout();
     checkAuth();
+    return resp;
   }
 }
