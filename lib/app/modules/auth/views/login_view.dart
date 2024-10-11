@@ -16,7 +16,7 @@ class LoginView extends GetView<AuthenticationController> {
 
   LoginView({super.key});
 
-  Future<void> loginAction() async {
+  void loginAction() async {
     _usernameNode.unfocus();
     _passwordNode.unfocus();
     controller.login(
@@ -97,7 +97,7 @@ class LoginView extends GetView<AuthenticationController> {
                           controller: _passwordInputController,
                           focusNode: _passwordNode,
                           textInputAction: TextInputAction.done,
-                          onFieldSubmitted: (_) async => await loginAction(),
+                          onFieldSubmitted: (_) => loginAction(),
                         ),
                         const SizedBox(height: 8),
                         SizedBox(
@@ -106,7 +106,7 @@ class LoginView extends GetView<AuthenticationController> {
                             () => Granulebutton(
                               text: "Login",
                               loading: controller.isLoading.value,
-                              onTap: () async => await loginAction(),
+                              onTap: loginAction,
                             ),
                           ),
                         ),

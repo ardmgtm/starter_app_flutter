@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controllers/bottom_navigation_bar_controller.dart';
 
+import '../controllers/bottom_navigation_bar_controller.dart';
 import '../controllers/home_controller.dart';
 import 'components/app_bottom_navigation_bar.dart';
 import 'components/app_drawer.dart';
